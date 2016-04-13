@@ -91,7 +91,7 @@
 当初在windows上可以使用xshell进行ssh连接，非常好用。换到mac上就没有那么好用的工具了，只能使用terminal或者iterm2，克隆会话啥的需要配置，比较麻烦，还是学学tmux比较好。
 最常见的使用场景就是使用tmux开左右两个pane，一边vim，一边shell或者看日志。">
 <meta property="og:image" content="http://tangosource.com/wp-content/uploads/2015/05/image10.png">
-<meta property="og:updated_time" content="2016-04-11T16:21:03.000Z">
+<meta property="og:updated_time" content="2016-04-12T16:25:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tmux学习笔记">
 <meta name="twitter:description" content="tmux简单介绍tmux是一款终端复用工具，我主要在ssh时使用它。类似的有screen，以后有空再学。
@@ -325,8 +325,37 @@
 <p>最重要的就是记住<code>&lt;ctrl+b&gt;</code>这个prefix-command，在tmux内执行任何操作前都需要按这个组合键。这个前缀组合按键当然是可以在配置文件里修改的，后面会介绍。</p>
 <h1 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h1><p>主要介绍一下比较常用的进阶操作，过于冷门的操作就不做介绍了。</p>
 <h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><p>以下操作，在终端中执行时需要加上<code>tmux</code>，如新建一个名为“test”的session的命令为<code>tmux new -s &quot;test&quot;</code>；在tmux内，先按<code>ctrl+b</code>，然后输入<code>:</code>就可以敲命令了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">new              # Create a new session</span><br><span class="line"> -s &quot;Session&quot;    # Create named session</span><br><span class="line"> -n &quot;Window&quot;     # Create named Window</span><br><span class="line"> -c &quot;/dir&quot;       # Start in target directory</span><br><span class="line"></span><br><span class="line">attach           # Attach last/available session</span><br><span class="line"> -t &quot;#&quot;          # Attach target session</span><br><span class="line"> -d              # Detach the session from other instances</span><br><span class="line"></span><br><span class="line">ls               # List open sessions</span><br><span class="line"> -a              # List all open sessions</span><br><span class="line"></span><br><span class="line">lsw              # List windows</span><br><span class="line"> -a              # List all windows</span><br><span class="line"> -s              # List all windows in session</span><br><span class="line"></span><br><span class="line">lsp              # List panes</span><br><span class="line"> -a              # List all panes</span><br><span class="line"> -s              # List all panes in session</span><br><span class="line"> -t              # List all panes in target</span><br><span class="line"></span><br><span class="line">kill-window      # Kill current window</span><br><span class="line"> -t &quot;#&quot;          # Kill target window</span><br><span class="line"> -a              # Kill all windows</span><br><span class="line"> -a -t &quot;#&quot;       # Kill all windows but the target</span><br><span class="line"></span><br><span class="line">kill-session     # Kill current session</span><br><span class="line"> -t &quot;#&quot;          # Kill target session</span><br><span class="line"> -a              # Kill all sessions</span><br><span class="line"> -a -t &quot;#&quot;       # Kill all sessions but the target</span><br></pre></td></tr></table></figure>
-<h2 id="session操作"><a href="#session操作" class="headerlink" title="session操作"></a>session操作</h2><p>在tmux内，先按<code>ctrl+b</code>：</p>
+<pre><code>new              # Create a new session
+ -s &quot;Session&quot;    # Create named session
+ -n &quot;Window&quot;     # Create named Window
+ -c &quot;/dir&quot;       # Start in target directory
+
+attach           # Attach last/available session
+ -t &quot;#&quot;          # Attach target session
+ -d              # Detach the session from other instances
+
+ls               # List open sessions
+ -a              # List all open sessions
+
+lsw              # List windows
+ -a              # List all windows
+ -s              # List all windows in session
+
+lsp              # List panes
+ -a              # List all panes
+ -s              # List all panes in session
+ -t              # List all panes in target
+
+kill-window      # Kill current window
+ -t &quot;#&quot;          # Kill target window
+ -a              # Kill all windows
+ -a -t &quot;#&quot;       # Kill all windows but the target
+
+kill-session     # Kill current session
+ -t &quot;#&quot;          # Kill target session
+ -a              # Kill all sessions
+ -a -t &quot;#&quot;       # Kill all sessions but the target
+</code></pre><h2 id="session操作"><a href="#session操作" class="headerlink" title="session操作"></a>session操作</h2><p>在tmux内，先按<code>ctrl+b</code>：</p>
 <table>
 <thead>
 <tr>
@@ -459,8 +488,25 @@
 <p>我只设置了底部状态栏的样式，效果如下图：</p>
 <p><img src="http://tangosource.com/wp-content/uploads/2015/05/image10.png" alt=""></p>
 <p>配置内容为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># 颜色</span><br><span class="line">set -g status-bg black</span><br><span class="line">set -g status-fg white</span><br><span class="line"></span><br><span class="line"># 位置</span><br><span class="line">set-option -g status-justify centre</span><br><span class="line"></span><br><span class="line"># 左侧</span><br><span class="line">set-option -g status-left &apos;#[bg=black,fg=green][#[fg=cyan]#S#[fg=green]]&apos;</span><br><span class="line">set-option -g status-left-length 20</span><br><span class="line"></span><br><span class="line"># 中间的window列表</span><br><span class="line">setw -g automatic-rename on</span><br><span class="line">set-window-option -g window-status-format &apos;#[dim]#I:#[default]#W#[fg=grey,dim]&apos;</span><br><span class="line">set-window-option -g window-status-current-format &apos;#[fg=cyan,bold]#I#[fg=blue]:#[fg=cyan]#W#[fg=dim]&apos;</span><br><span class="line"></span><br><span class="line"># 右侧</span><br><span class="line">set -g status-right &apos;#[fg=green][#[fg=cyan]%Y-%m-%d#[fg=green]]&apos;</span><br></pre></td></tr></table></figure>
-<h1 id="参考资源"><a href="#参考资源" class="headerlink" title="参考资源"></a>参考资源</h1><ul>
+<pre><code># 颜色
+set -g status-bg black
+set -g status-fg white
+
+# 位置
+set-option -g status-justify centre
+
+# 左侧
+set-option -g status-left &apos;#[bg=black,fg=green][#[fg=cyan]#S#[fg=green]]&apos;
+set-option -g status-left-length 20
+
+# 中间的window列表
+setw -g automatic-rename on
+set-window-option -g window-status-format &apos;#[dim]#I:#[default]#W#[fg=grey,dim]&apos;
+set-window-option -g window-status-current-format &apos;#[fg=cyan,bold]#I#[fg=blue]:#[fg=cyan]#W#[fg=dim]&apos;
+
+# 右侧
+set -g status-right &apos;#[fg=green][#[fg=cyan]%Y-%m-%d#[fg=green]]&apos;
+</code></pre><h1 id="参考资源"><a href="#参考资源" class="headerlink" title="参考资源"></a>参考资源</h1><ul>
 <li><a href="http://tangosource.com/blog/a-tmux-crash-course-tips-and-tweaks/" target="_blank" rel="external">A Tmux crash course: tips and tweaks.</a></li>
 <li><a href="https://gist.github.com/MohamedAlaa/2961058#file-tmux-cheatsheet-markdown" target="_blank" rel="external">tmux shortcuts &amp; cheatsheet</a></li>
 <li><a href="https://learnxinyminutes.com/docs/tmux/" target="_blank" rel="external">learn Tmux in Y minites</a></li>
